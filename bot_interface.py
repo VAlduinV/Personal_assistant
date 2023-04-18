@@ -2,6 +2,8 @@ import os
 import tkinter as tk
 from file_sorter import FileSorter
 import subprocess
+# Імпортуємо класи UserInterface та ConsoleInterface з вихідного коду
+from abc import ABC, abstractmethod
 
 current_process = None
 
@@ -151,15 +153,64 @@ class BotInterface:
         # Запустити головний цикл подій кореневого вікна
         self.root.mainloop()
 
+class UserInterface(ABC):
+    @abstractmethod
+    def show_cards(self, cards):
+        pass
+
+    @abstractmethod
+    def show_notes(self, notes):
+        pass
+
+    @abstractmethod
+    def show_available_commands(self, commands):
+        pass
+
+
+class ConsoleInterface(UserInterface):
+    def show_cards(self, cards):
+        # Виводимо картки з контактами користувача в консоль
+        print("Contacts:")
+        for card in cards:
+            print(f"Name: {card['name']}, Phone: {card['phone']}, Email: {card['email']}")
+
+    def show_notes(self, notes):
+        # Виводимо нотатки користувача в консоль
+        print("Notes:")
+        for note in notes:
+            print(note)
+
+    def show_available_commands(self, commands):
+        # Виводимо доступні команди в консоль
+        print("Available commands:")
+        for command in commands:
+            print(command)
+
 
 if __name__ == "__main__":
     print("""
-    ____    ___   _    _    _       __  _____            
-    |  _ \  / _ \ | |  | |  | |     /_ ||  __ \           
-    | |_) || | | || |_ | |__| |  ___ | || |__) |___  _ __ 
+    ____    ___   _    _    _       __  _____
+    |  _ \  / _ \ | |  | |  | |     /_ ||  __ \
+    | |_) || | | || |_ | |__| |  ___ | || |__) |___  _ __
     |  _ < | | | || __||  __  | / _ \| ||  ___// _ \| '__|
-    | |_) || |_| || |_ | |  | ||  __/| || |   |  __/| |   
-    |____/  \___/  \__||_|  |_| \___||_||_|    \___||_|                                     
+    | |_) || |_| || |_ | |  | ||  __/| || |   |  __/| |
+    |____/  \___/  \__||_|  |_| \___||_||_|    \___||_|
     """)
     bot = BotInterface()
     bot.run()
+    # Тестуємо клас ConsoleInterface
+    # Створення об'єкту класу ConsoleInterface
+    console_interface = ConsoleInterface()
+
+    # Заготовка даних для тестування
+    test_cards = [
+        {"name": "John", "phone": "123456789", "email": "john@example.com"},
+        {"name": "Jane", "phone": "987654321", "email": "jane@example.com"}
+    ]
+    test_notes = ["Note 1", "Note 2", "Note 3"]
+    test_commands = ["Command 1", "Command 2", "Command 3"]
+
+    # Виклик методів класу ConsoleInterface для виводу даних в консоль
+    console_interface.show_cards(test_cards)
+    console_interface.show_notes(test_notes)
+    console_interface.show_available_commands(test_commands)
