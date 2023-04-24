@@ -1,8 +1,7 @@
-<<<<<<< HEAD
 # Docker-команда FROM вказує базовий образ контейнера
 # Наш базовий образ - це Linux з попередньо встановленим python-3.11
 FROM python:3.11
-COPY INFORMATION/requirements.txt /
+COPY requirements.txt /
 # Встановимо змінну середовища
 ENV Personal_assistant /bot_interface
 
@@ -19,7 +18,6 @@ RUN pip install -r requirements.txt
 EXPOSE 8000
 
 # Запустимо нашу програму всередині контейнера
-=======
 # Docker-команда FROM вказує базовий образ контейнера
 # Наш базовий образ - це Linux з попередньо встановленим python-3.11
 FROM python:3.11
@@ -40,5 +38,5 @@ RUN pip install -r requirements.txt
 EXPOSE 5000
 
 # Запустимо нашу програму всередині контейнера
->>>>>>> origin/main
+
 ENTRYPOINT ["python", "bot_interface.py"]
