@@ -1,3 +1,0 @@
-[options.entry_points]
-console_scripts =
-    bot_helper = bot_helper.bot_interface:main

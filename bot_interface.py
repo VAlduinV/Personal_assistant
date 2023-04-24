@@ -2,6 +2,7 @@ import os
 import tkinter as tk
 from file_sorter import FileSorter
 import subprocess
+
 # Імпортуємо класи UserInterface та ConsoleInterface з вихідного коду
 from abc import ABC, abstractmethod
 
@@ -16,9 +17,23 @@ class BotInterface:
         self.root.config(bg="black")
 
         # Создаем метки для надписей "B0t", "Hel" и "Per"
-        self.label_bot = tk.Label(self.root, text="B0t", font=("Lucida Handwriting", 60), fg="red", bg="black")
-        self.label_hel = tk.Label(self.root, text="He1", font=("Lucida Handwriting", 60), fg="green", bg="black")
-        self.label_per = tk.Label(self.root, text="Per", font=("Lucida Handwriting", 60), fg="blue", bg="black")
+        self.label_bot = tk.Label(
+            self.root, text="B0t", font=("Lucida Handwriting", 60), fg="red", bg="black"
+        )
+        self.label_hel = tk.Label(
+            self.root,
+            text="He1",
+            font=("Lucida Handwriting", 60),
+            fg="green",
+            bg="black",
+        )
+        self.label_per = tk.Label(
+            self.root,
+            text="Per",
+            font=("Lucida Handwriting", 60),
+            fg="blue",
+            bg="black",
+        )
 
         # Устанавливаем метки в верхнюю часть окна
         self.label_bot.place(x=230, y=70, anchor="center")
@@ -26,14 +41,38 @@ class BotInterface:
         self.label_per.place(x=560, y=70, anchor="center")
 
         # Создаем кнопки
-        self.button_sort = tk.Button(self.root, text="Sort Files", font=("Lucida Handwriting", 30), bg="black",
-                                     fg="white", command=self.sort_files)
-        self.button_address = tk.Button(self.root, text="Address Book", font=("Lucida Handwriting", 30), bg="black",
-                                        fg="white", command=self.address_book)
-        self.button_notes = tk.Button(self.root, text="Notes", font=("Lucida Handwriting", 30), bg="black", fg="white",
-                                      command=self.notes)
-        self.button_exit = tk.Button(self.root, text="Exit", font=("Lucida Handwriting", 30), bg="black", fg="white",
-                                     command=self.exit)
+        self.button_sort = tk.Button(
+            self.root,
+            text="Sort Files",
+            font=("Lucida Handwriting", 30),
+            bg="black",
+            fg="white",
+            command=self.sort_files,
+        )
+        self.button_address = tk.Button(
+            self.root,
+            text="Address Book",
+            font=("Lucida Handwriting", 30),
+            bg="black",
+            fg="white",
+            command=self.address_book,
+        )
+        self.button_notes = tk.Button(
+            self.root,
+            text="Notes",
+            font=("Lucida Handwriting", 30),
+            bg="black",
+            fg="white",
+            command=self.notes,
+        )
+        self.button_exit = tk.Button(
+            self.root,
+            text="Exit",
+            font=("Lucida Handwriting", 30),
+            bg="black",
+            fg="white",
+            command=self.exit,
+        )
 
         # Устанавливаем кнопки на экран
         self.button_sort.place(x=400, y=250, anchor="center")
@@ -50,15 +89,20 @@ class BotInterface:
     def show_no_path_found(self):
         # Ця функція створює мітку, яка вказує, що шлях не знайдено, і відображає її на екрані.
         if not self.label_no_path_found:
-            self.label_no_path_found = tk.Label(self.root, text="No path found, try again.", font=("Arial", 20),
-                                                fg="red", bg="black")
+            self.label_no_path_found = tk.Label(
+                self.root,
+                text="No path found, try again.",
+                font=("Arial", 20),
+                fg="red",
+                bg="black",
+            )
         self.label_no_path_found.config(text="No path found, try again.")
         self.button_sort_files.config(text="No path found, try again.", fg="red")
         self.root.after(1000, self.hide_input_error)
 
     def hide_input_error(self):
         # Ця функція приховує мітку, яка вказує, що шлях не знайдено.
-        if hasattr(self, 'label_no_path_found'):
+        if hasattr(self, "label_no_path_found"):
             self.label_no_path_found.destroy()
 
     def show_sort_files_input(self):
@@ -72,16 +116,34 @@ class BotInterface:
         self.input_folder_address = tk.Entry(self.root, font=("Arial", 20), width=45)
         self.input_folder_address.place(x=50, y=400)
 
-        self.label_input_folder_address = tk.Label(self.root, text="Input folder path:", font=("Arial", 20), fg="white",
-                                                   bg="black")
+        self.label_input_folder_address = tk.Label(
+            self.root,
+            text="Input folder path:",
+            font=("Arial", 20),
+            fg="white",
+            bg="black",
+        )
         self.label_input_folder_address.place(x=50, y=350)
 
-        self.button_sort_files = tk.Button(self.root, text="Press to sort", font=("Arial", 20), bg="black", fg="white",
-                                           width=10, command=self.sort_files_by_button)
+        self.button_sort_files = tk.Button(
+            self.root,
+            text="Press to sort",
+            font=("Arial", 20),
+            bg="black",
+            fg="white",
+            width=10,
+            command=self.sort_files_by_button,
+        )
         self.button_sort_files.place(x=400, y=500, anchor="center")
 
-        self.button_return = tk.Button(self.root, text="Return to menu", font=("Arial", 20), bg="black", fg="white",
-                                       command=self.return_to_menu)
+        self.button_return = tk.Button(
+            self.root,
+            text="Return to menu",
+            font=("Arial", 20),
+            bg="black",
+            fg="white",
+            command=self.return_to_menu,
+        )
         self.button_return.place(x=400, y=750, anchor="center")
 
     def sort_files_by_button(self):
@@ -96,7 +158,9 @@ class BotInterface:
             print(f"{folder_address} files sorted")
             self.return_to_menu()
         else:
-            self.label_input_folder_address.config(text="No path found, try again.", fg="red")
+            self.label_input_folder_address.config(
+                text="No path found, try again.", fg="red"
+            )
             self.root.after(1000, self.input_folder_address.delete, 0, tk.END)
             if self.label_no_path_found:
                 self.label_no_path_found.place(x=400, y=550, anchor="center")
@@ -153,6 +217,7 @@ class BotInterface:
         # Запустити головний цикл подій кореневого вікна
         self.root.mainloop()
 
+
 class UserInterface(ABC):
     @abstractmethod
     def show_cards(self, cards):
@@ -172,7 +237,9 @@ class ConsoleInterface(UserInterface):
         # Виводимо картки з контактами користувача в консоль
         print("Contacts:")
         for card in cards:
-            print(f"Name: {card['name']}, Phone: {card['phone']}, Email: {card['email']}")
+            print(
+                f"Name: {card['name']}, Phone: {card['phone']}, Email: {card['email']}"
+            )
 
     def show_notes(self, notes):
         # Виводимо нотатки користувача в консоль
@@ -188,14 +255,22 @@ class ConsoleInterface(UserInterface):
 
 
 if __name__ == "__main__":
-    print("""
-    ____    ___   _    _    _       __  _____
-    |  _ \  / _ \ | |  | |  | |     /_ ||  __ \
-    | |_) || | | || |_ | |__| |  ___ | || |__) |___  _ __
-    |  _ < | | | || __||  __  | / _ \| ||  ___// _ \| '__|
-    | |_) || |_| || |_ | |  | ||  __/| || |   |  __/| |
-    |____/  \___/  \__||_|  |_| \___||_||_|    \___||_|
-    """)
+    print(
+        """
+▄▄▄▄▄▄▄▄▄▄    ▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄         ▄  ▄▄▄▄▄▄▄▄▄▄▄     ▄▄▄▄      ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄ 
+▐░░░░░░░░░░▌  ▐░░░░░░░░░▌▐░░░░░░░░░░░▌▐░▌       ▐░▌▐░░░░░░░░░░░▌  ▄█░░░░▌    ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
+▐░█▀▀▀▀▀▀▀█░▌▐░█░█▀▀▀▀▀█░▌▀▀▀▀█░█▀▀▀▀ ▐░▌       ▐░▌▐░█▀▀▀▀▀▀▀▀▀  ▐░░▌▐░░▌    ▐░█▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀▀▀ ▐░█▀▀▀▀▀▀▀█░▌
+▐░▌       ▐░▌▐░▌▐░▌    ▐░▌    ▐░▌     ▐░▌       ▐░▌▐░▌            ▀▀ ▐░░▌    ▐░▌       ▐░▌▐░▌          ▐░▌       ▐░▌
+▐░█▄▄▄▄▄▄▄█░▌▐░▌ ▐░▌   ▐░▌    ▐░▌     ▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄▄▄      ▐░░▌    ▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄█░▌
+▐░░░░░░░░░░▌ ▐░▌  ▐░▌  ▐░▌    ▐░▌     ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌     ▐░░▌    ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
+▐░█▀▀▀▀▀▀▀█░▌▐░▌   ▐░▌ ▐░▌    ▐░▌     ▐░█▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀▀▀      ▐░░▌    ▐░█▀▀▀▀▀▀▀▀▀ ▐░█▀▀▀▀▀▀▀▀▀ ▐░█▀▀▀▀█░█▀▀ 
+▐░▌       ▐░▌▐░▌    ▐░▌▐░▌    ▐░▌     ▐░▌       ▐░▌▐░▌               ▐░░▌    ▐░▌          ▐░▌          ▐░▌     ▐░▌  
+▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄█░█░▌    ▐░▌     ▐░▌       ▐░▌▐░█▄▄▄▄▄▄▄▄▄  ▄▄▄▄█░░█▄▄▄ ▐░▌          ▐░█▄▄▄▄▄▄▄▄▄ ▐░▌      ▐░▌ 
+▐░░░░░░░░░░▌  ▐░░░░░░░░░▌     ▐░▌     ▐░▌       ▐░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░▌          ▐░░░░░░░░░░░▌▐░▌       ▐░▌
+ ▀▀▀▀▀▀▀▀▀▀    ▀▀▀▀▀▀▀▀▀       ▀       ▀         ▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀            ▀▀▀▀▀▀▀▀▀▀▀  ▀         ▀ 
+                                                                                                                    
+        """
+    )
     bot = BotInterface()
     bot.run()
     # Тестуємо клас ConsoleInterface
@@ -205,7 +280,7 @@ if __name__ == "__main__":
     # Заготовка даних для тестування
     test_cards = [
         {"name": "John", "phone": "123456789", "email": "john@example.com"},
-        {"name": "Jane", "phone": "987654321", "email": "jane@example.com"}
+        {"name": "Jane", "phone": "987654321", "email": "jane@example.com"},
     ]
     test_notes = ["Note 1", "Note 2", "Note 3"]
     test_commands = ["Command 1", "Command 2", "Command 3"]
