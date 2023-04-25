@@ -12,7 +12,7 @@ WORKDIR $Personal_assistant
 COPY . /bot_interface
 
 # Встановимо залежності усередині контейнера
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r /requirements.txt
 
 # Позначимо порт де працює програма всередині контейнера
 EXPOSE 5000
