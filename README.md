@@ -1,4 +1,3 @@
-[![MIT Licensed][badge-mit]][license]
 # B0tHe1per
     ____    ___   _    _    _       __  _____            
     |  _ \  / _ \ | |  | |  | |     /_ ||  __ \           
