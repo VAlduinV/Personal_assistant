@@ -2,14 +2,10 @@
 # Docker-команда FROM вказує базовий образ контейнера
 FROM python:3.11
 # Встановлюємо залежності
-COPY ./Personal_assistant/Program/requirements.txt /app/requirements.txt
-RUN pip install -r /app/requirements.txt
-
-# Копіюємо файли у робочу директорію контейнера
-COPY ./Personal_assistant/Program /app
-
-# Задаємо робочу директорію
+# Встановлюємо пакунок xvfb
+RUN apt-get update && apt-get install -y xvfb
+COPY requirements.txt /
+RUN pip install --no-cache-dir -r /requirements.txt
+COPY . /app
 WORKDIR /app
-
-# Запускаємо команду для запуску вашого коду
-CMD ["python", "bot_interface.py"]
+CMD ["xvfb-run", "python", "bot_interface.py"]
