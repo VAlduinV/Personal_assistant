@@ -8,6 +8,13 @@ from abc import ABC, abstractmethod
 
 current_process = None
 
+if os.environ.get('DISPLAY', '') == '':
+    print('no display found. Using :0.0')
+    os.environ.__setitem__('DISPLAY', ':0.0')
+
+
+# os.system("Xvfb :1 -screen 0 800x1000x16 &")
+# os.environ['DISPLAY'] = ":1.0"
 
 class BotInterface:
     def __init__(self):
