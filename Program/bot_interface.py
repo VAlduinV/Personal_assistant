@@ -1,5 +1,6 @@
 import os
 import tkinter as tk
+import pyautogui
 from file_sorter import FileSorter
 import subprocess
 
@@ -19,7 +20,8 @@ if os.environ.get('DISPLAY', '') == '':
 class BotInterface:
     def __init__(self):
         self.root = tk.Tk()
-        self.root.geometry("800x1000")
+        self.screen_width, self.screen_height = pyautogui.size()
+        self.root.geometry(f'{self.screen_width}x{self.screen_height}')
         self.root.title("B0tHe1Per")
         self.root.config(bg="black")
 
@@ -43,9 +45,9 @@ class BotInterface:
         )
 
         # Устанавливаем метки в верхнюю часть окна
-        self.label_bot.place(x=230, y=70, anchor="center")
-        self.label_hel.place(x=400, y=70, anchor="center")
-        self.label_per.place(x=560, y=70, anchor="center")
+        self.label_bot.place(x=230, y=self.screen_height/2, anchor="center")
+        self.label_hel.place(x=400, y=self.screen_height/2, anchor="center")
+        self.label_per.place(x=560, y=self.screen_height/2, anchor="center")
 
         # Создаем кнопки
         self.button_sort = tk.Button(
@@ -82,10 +84,10 @@ class BotInterface:
         )
 
         # Устанавливаем кнопки на экран
-        self.button_sort.place(x=400, y=250, anchor="center")
-        self.button_address.place(x=400, y=370, anchor="center")
-        self.button_notes.place(x=400, y=490, anchor="center")
-        self.button_exit.place(x=400, y=610, anchor="center")
+        self.button_sort.place(x=self.screen_width/2, y=250, anchor="center")
+        self.button_address.place(x=self.screen_width/2, y=370, anchor="center")
+        self.button_notes.place(x=self.screen_width/2, y=490, anchor="center")
+        self.button_exit.place(x=self.screen_width/2, y=610, anchor="center")
 
         self.input_folder_address = None
         self.label_input_folder_address = None
